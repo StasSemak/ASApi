@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BussinesLogic.DTOs
+namespace BussinesLogic.DTOs.User
 {
-    public class UserRegisterDto
+    public class UserLoginDto
     {
-        public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Role { get; set; }
     }
 }

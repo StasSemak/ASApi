@@ -24,14 +24,29 @@ namespace Data.Data
                                   .HasForeignKey(x => x.RoleId)
                                   .HasPrincipalKey(x => x.Id)
                                   .IsRequired();
-
             builder.Entity<User>().Property(x => x.Id).ValueGeneratedOnAdd();
+
+            builder.Entity<Category>().Property(x => x.Name)
+                                      .IsRequired()
+                                      .HasMaxLength(250);
+            builder.Entity<Category>().Property(x => x.Image)
+                                      .IsRequired()   
+                                      .HasMaxLength(255);
+            builder.Entity<Category>().Property(x => x.Description)
+                                      .HasMaxLength(4000);
+            builder.Entity<Category>().Property(x => x.IsDeleted)
+                                      .HasDefaultValue(false);
+            builder.Entity<Category>().Property(x => x.DateCreated)
+                                      .HasDefaultValue(DateTime.UtcNow);
+            
 
             builder.Entity<Role>().HasData(MockData.GetRoles());
             builder.Entity<User>().HasData(MockData.GetUsers());
+            builder.Entity<Category>().HasData(MockData.GetCategories());
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

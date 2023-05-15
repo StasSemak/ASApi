@@ -1,4 +1,5 @@
-﻿using BussinesLogic.DTOs;
+﻿using BussinesLogic.DTOs.Category;
+using BussinesLogic.DTOs.User;
 using Data.Models;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,11 @@ namespace BussinesLogic.Profiles
                 .ForMember(x => x.Role, o => o.Ignore())
                 .ForMember(x => x.NormalizedEmail, o => o.MapFrom(s => s.Email))
                 .ForMember(x => x.NormalizedUserName, o => o.MapFrom(s => s.UserName));
+
+            CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryDto, Category>();
+            CreateMap<CategoryCreateDto, Category>()
+                .ForMember(x => x.Image, o => o.Ignore());
         }
     }
 }

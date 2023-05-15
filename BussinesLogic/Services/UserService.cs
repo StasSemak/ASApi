@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BussinesLogic.DTOs;
+using BussinesLogic.DTOs.User;
 using BussinesLogic.Interfaces;
 using Data.Data;
 using Data.Models;

@@ -12,23 +12,26 @@ namespace Data.Data
 {
     public static class MockData
     {
+        static private string userRoleId = Guid.NewGuid().ToString();
+        static private string superuserRoleId = Guid.NewGuid().ToString();
+        static private string adminRoleId = Guid.NewGuid().ToString();
         public static List<Role> GetRoles()
         {
             return new List<Role>
             {
                 new Role()
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = userRoleId,
                     Name = "User"
                 },
                 new Role()
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = superuserRoleId,
                     Name = "Superuser"
                 },
                 new Role()
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = adminRoleId,
                     Name = "Admin"
                 }
             };
@@ -44,7 +47,7 @@ namespace Data.Data
                 Email = "mancool321@gmail.com",
                 NormalizedEmail = "mancool321@gmail.com",
                 NormalizedUserName = "coolman123",
-                RoleId = GetRoles().Where(x => x.Name == "User").FirstOrDefault().Id
+                RoleId = userRoleId
             };
             user1.PasswordHash = hasher.HashPassword(user1, "qwerty1234");
 
@@ -55,7 +58,7 @@ namespace Data.Data
                 Email = "john1997@gmail.com",
                 NormalizedEmail = "john1997@gmail.com",
                 NormalizedUserName = "john1997",
-                RoleId = GetRoles().Where(x => x.Name == "User").FirstOrDefault().Id
+                RoleId = userRoleId
             };
             user2.PasswordHash = hasher.HashPassword(user2, "strongpass0");
 
@@ -66,7 +69,7 @@ namespace Data.Data
                 Email = "mymail@gmail.com",
                 NormalizedEmail = "mymail@gmail.com",
                 NormalizedUserName = "admin",
-                RoleId = GetRoles().Where(x => x.Name == "Admin").FirstOrDefault().Id
+                RoleId = adminRoleId
             };
             user3.PasswordHash = hasher.HashPassword(user3, "aDmInPaSsWoRd1357");
 
@@ -77,11 +80,66 @@ namespace Data.Data
                 Email = "iamthebest@gmail.com",
                 NormalizedEmail = "iamthebest@gmail.com",
                 NormalizedUserName = "friend_of_admin",
-                RoleId = GetRoles().Where(x => x.Name == "Superuser").FirstOrDefault().Id
+                RoleId = superuserRoleId
             };
             user4.PasswordHash = hasher.HashPassword(user4, "hACkerw0ntgue55");
 
             return new List<User>() { user1, user2, user3, user4 };
         }
-    }
+
+        public static List<Category> GetCategories()
+        {
+            return new List<Category>()
+            {
+                new Category()
+                {
+                    Id = 1,
+                    Name = "Laptops",
+                    Priority = 1,
+                    Image = "laptop.jpg",
+                    Description = "Cool laptops here"
+                },
+                new Category()
+                {
+                    Id = 2,
+                    Name = "Phones",
+                    Priority = 3,
+                    Image = "phone.jpg",
+                    Description = "Great phones for everyone"
+                },
+                new Category()
+                {
+                    Id = 3,
+                    Name = "Monitors",
+                    Priority = 2,
+                    Image = "monitor.jpg",
+                    Description = "Monitors for all uses"
+                },
+                new Category()
+                {
+                    Id = 4,
+                    Name = "RAM",
+                    Priority = 5,
+                    Image = "ram.jpg",
+                    Description = "Memory that your computer will enjoy"
+                },
+                new Category()
+                {
+                    Id = 5,
+                    Name = "CPU",
+                    Priority = 4,
+                    Image = "cpu.jpg",
+                    Description = "Processors smarter than Einstein"
+                },
+                new Category()
+                {
+                    Id = 6,
+                    Name = "GPU",
+                    Priority = 6,
+                    Image = "gpu.jpg",
+                    Description = "Best graphics for not only games"
+                },
+            };
+        }
+    } 
 }
