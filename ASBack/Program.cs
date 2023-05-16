@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-string connStr = builder.Configuration.GetConnectionString("LocalDb");
+string connStr = builder.Configuration.GetConnectionString("SommeDb");
 
 builder.Services.AddDbContext<Data.Data.DbContext>(options => options.UseSqlServer(connStr));
 builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<Data.Data.DbContext>()
@@ -28,14 +28,22 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseSwagger();
+app.UseSwaggerUI();
+
+string dir;
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    dir = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory().ToString()).FullName,
+        "BussinesLogic", "Images");
+}
+else dir = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+
+if (!Directory.Exists(dir))
+{
+    Directory.CreateDirectory(dir);
 }
 
-var dir = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory().ToString()).FullName,
-    "BussinesLogic", "Images");
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(dir),

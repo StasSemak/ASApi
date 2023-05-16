@@ -10,8 +10,9 @@ namespace BussinesLogic.Helpers
 {
     public static class ImageWorker
     {
-        private static string folderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory().ToString()).FullName,
-            "BussinesLogic", "Images");
+        //private static string folderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory().ToString()).FullName,
+        //    "BussinesLogic", "Images");
+        private static string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
 
         public static Bitmap FromBase64StringToImage(this string base64String)
         {
@@ -40,7 +41,7 @@ namespace BussinesLogic.Helpers
             }
             catch(Exception ex)
             {
-                throw new Exception("Error saving image!\n" + ex.ToString());
+                throw new Exception("Error saving image!\n" + ex.Message);
             }
             return filename;
         }
@@ -87,7 +88,7 @@ namespace BussinesLogic.Helpers
                         if (watermark)
                         {
 
-                            using (Image watermarkImage = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "Images", "watermark.png")))
+                            using (Image watermarkImage = Image.FromFile(Path.Combine(folderPath, "watermark.png")))
                             using (TextureBrush watermarkBrush = new TextureBrush(watermarkImage))
                             {
                                 //Not responsive

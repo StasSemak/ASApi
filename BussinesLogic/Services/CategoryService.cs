@@ -58,6 +58,19 @@ namespace BussinesLogic.Services
             return mapper.Map<CategoryDto>(category);
         }
 
+        public async Task DeleteCategoryAsync(int id)
+        {
+            var category = await context.Categories
+                                        .Where(x => x.Id == id)
+                                        .Where(x => x.IsDeleted == false)
+                                        .SingleOrDefaultAsync();
+            if (category == null) throw new Exception("Category not found!");
+
+            category.IsDeleted = true;
+            context.Categories.Update(category);
+            await context.SaveChangesAsync();
+        }
+
         public ICollection<CategoryDto> GetAll()
         {
             var categories = context.Categories
@@ -73,6 +86,8 @@ namespace BussinesLogic.Services
                                         .Where(x => x.Id == id)
                                         .Where(x => x.IsDeleted == false)
                                         .FirstOrDefaultAsync();
+            if (category == null) throw new Exception("Category not found!");
+
             return mapper.Map<CategoryDto>(category);
         }
     }

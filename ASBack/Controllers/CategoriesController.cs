@@ -71,5 +71,19 @@ namespace ASBack.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute]int id)
+        {
+            try
+            {
+                await service.DeleteCategoryAsync(id);
+                return Ok($"Category successfully deleted");
+            }
+            catch (Exception ex) 
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

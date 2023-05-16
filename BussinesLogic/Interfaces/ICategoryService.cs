@@ -13,5 +13,6 @@ namespace BussinesLogic.Interfaces
         Task<CategoryDto> GetCategoryAsync(int id);
         Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto model);
         Task<CategoryDto> EditCategoryAsync(CategoryEditDto model);
+        Task DeleteCategoryAsync(int id);
     }
 }
